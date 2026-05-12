@@ -1,127 +1,69 @@
-# Suricata-Wazuh Threat Detection & VirusTotal Integration Lab
+# 🛡️ SOC Automation Lab: Suricata IDS + Wazuh SIEM + VirusTotal
 
-## Overview
-This project demonstrates the integration of Suricata IDS, Wazuh SIEM, and VirusTotal threat intelligence on Kali Linux for real-time threat detection and centralized security monitoring. The lab was designed to simulate a Security Operations Center (SOC) monitoring environment where network traffic is analyzed, suspicious activity is detected, and alerts are monitored through Wazuh.
-
----
-
-# Technologies Used
-- Kali Linux
-- Suricata IDS
-- Wazuh SIEM
-- VirusTotal
-- GitHub
-- VS Code
+## 📋 Executive Summary
+This lab showcases the deployment of a modernized **Security Operations Center (SOC)** workflow. By integrating **Suricata (Intrusion Detection)** with **Wazuh (SIEM)** and automating threat intelligence via the **VirusTotal API**, I successfully built a system that detects, aggregates, and validates network threats in real-time.
 
 ---
 
-# Features
-- Intrusion Detection
-- Security Monitoring
-- Alert Analysis
-- Threat Intelligence Integration
-- Real-Time Monitoring
-- Log Analysis
+## 🛠️ Technical Stack
+- **OS:** Kali Linux (Attacker/Monitoring)
+- **IDS:** Suricata (Signature-based detection)
+- **SIEM:** Wazuh (Log aggregation & Alerting)
+- **Threat Intel:** VirusTotal (Automated Hash/IP Validation)
+- **Environment:** VS Code & GitHub for Documentation
 
 ---
 
-# Project Workflow
-```text
-Network Traffic
-      ↓
- Suricata IDS
-      ↓
-  Alert Logs
-      ↓
-    Wazuh
-      ↓
-Threat Monitoring
-      ↓
-VirusTotal Validation
-```
+## 🏗️ Project Architecture & Workflow
+The lab follows a structured data pipeline to ensure no threat goes unvalidated:
+1. **Detection:** Suricata monitors network traffic for known malicious signatures.
+2. **Aggregation:** Wazuh Manager ingests Suricata logs (`eve.json`) for centralized viewing.
+3. **Enrichment:** Wazuh triggers an automated API call to VirusTotal for any suspicious file hashes detected.
+4. **Action:** The analyst reviews enriched alerts on the Wazuh Dashboard for final triage.
 
 ---
 
-# Installation Process
+## 🚀 Implementation Highlights
 
-## Install Suricata
+### 1. Suricata Deployment
+Configured Suricata for high-performance network monitoring and ensured seamless logging for SIEM consumption.
 ```bash
-sudo apt update
-sudo apt install suricata -y
+sudo apt update && sudo apt install suricata -y
+sudo systemctl enable --now suricata
 ```
 
-## Start Suricata
-```bash
-sudo systemctl start suricata
-sudo systemctl enable suricata
-```
-
-## Check Service Status
-```bash
-sudo systemctl status suricata
-```
+### 2. SIEM & Threat Intel Integration
+Connected Wazuh to monitor the Suricata output directory and configured the `ossec.conf` to trigger VirusTotal lookups, transforming raw logs into actionable intelligence.
 
 ---
 
-# Wazuh Integration
-Wazuh was configured to monitor Suricata alert logs for centralized event analysis and security monitoring.
+## 🖼️ Visual Evidence (SOC Dashboard)
 
----
-
-# VirusTotal Integration
-VirusTotal was used for additional threat intelligence validation and suspicious indicator analysis.
-
----
-
-# Screenshots
-Project screenshots are located inside the `screenshots/` folder, providing visual evidence of the detection and monitoring workflow.
-
-### 1. Lab Environment & Threat Simulation
-*Setting up the environment and generating alerts through the terminal.*
-![VM Login](screenshots/VM-Login-Screen.png)
+### 🚨 Threat Simulation & Monitoring
+*Real-time validation of network alerts within the SOC environment.*
 ![Terminal Simulation](screenshots/Terminal-Threat-Simulation.png)
+![VM Login](screenshots/VM-Login-Screen.png)
 
-### 2. Wazuh SIEM Monitoring
-*Centralized alert management and real-time dashboard monitoring.*
+### 📊 SIEM Analysis (Wazuh)
+*Visualizing alert density and deep-diving into specific intrusion metadata.*
 ![Wazuh Dashboard](screenshots/Wazuh-Dashboard-Alerts.png)
 ![Wazuh Alert Details](screenshots/Wazuh-Alert-Details.png)
 
-### 3. Threat Intelligence & Log Integration
-*Validating threats via VirusTotal and checking integration logs.*
+### 🔍 Threat Validation (VirusTotal)
+*Automated verification of malicious indicators using global threat intelligence.*
 ![VirusTotal Results](screenshots/VirusTotal-Detection-Results.png)
 ![Wazuh Integration Logs](screenshots/Wazuh-Integration-Logs.png)
 
 ---
 
-# Challenges Faced
-- Wazuh manager timeout issues
-- Log forwarding troubleshooting
-- Service configuration issues
-- Alert monitoring setup
+## 🧠 Key Findings & SOC Skills
+- **Log Parsing:** Mastered the flow of data from `eve.json` to Wazuh indexes.
+- **Incident Triage:** Learned to differentiate between a raw IDS hit and a validated threat.
+- **Troubleshooting:** Overcame Wazuh manager timeouts and log-forwarding permission issues.
 
 ---
 
-# Lessons Learned
-- IDS monitoring
-- SIEM integration
-- Linux troubleshooting
-- Threat detection workflow
-- Security monitoring
-
----
-
-# Future Improvements
-- Add custom alert rules
-- Integrate ELK Stack
-- Implement automated alerting
-- Expand threat intelligence feeds
-
----
-
-# Author
-**Cybersecurity Student & SOC Analyst Enthusiast**
-Focused on:
-- Threat Detection
-- Security Monitoring
-- Incident Response
-- Blue Team Operations
+## 👨‍💻 Author
+**Sunday Ojeka**
+*Aspiring SOC Analyst | Cybersecurity Specialist*
+Focused on Blue Team Operations and Security Automation.
